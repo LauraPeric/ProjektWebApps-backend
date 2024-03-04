@@ -1,28 +1,30 @@
 const Recipe = require('../models/recipemodel');
 
-const getRecipeById = async (recipeId) => {
+// netoda za spremanje recepta
+const saveRecipe = async (req, res) => {
     try {
-        const recipe = await Recipe.findById(recipeId);
-        if (!recipe) {
-            return { success: false, error: 'Recipe not found' };
-        }
-        return { success: true, data: recipe };
+        const { title, description, authorName, recipeDetails } = req.body;
+
+        const recipeImage = req.files.map(file => ({
+            data: file.buffer,
+            contentType: file.mimetype,
+        }));
+
+        const newRecipe = new Recipe({
+            title,
+            description,
+            authorName,
+            recipeDetails,
+            recipeImage,
+        });
+
+        const savedRecipe = await newRecipe.save();
+
+        res.status(201).json(savedRecipe);
     } catch (error) {
-        console.error('Error fetching recipe by ID', error);
-        return { success: false, error: 'Internal server error' };
+        console.error('Greška prilikom spremanja recepta:', error);
+        return res.status(500).json({ error: 'Došlo je do interne pogreške.' });
     }
 };
 
-const createRecipe = async (recipeData) => {
-    try {
-        const newRecipe = new Recipe(recipeData);
-        await newRecipe.save();
-        return { success: true, message: 'Recipe created successfully' };
-    } catch (error) {
-        console.error('Error creating recipe', error);
-        return { success: false, error: 'Internal server error' };
-    }
-};
-
-
-module.exports = { getRecipeById, createRecipe };
+module.exports = { saveRecipe };
