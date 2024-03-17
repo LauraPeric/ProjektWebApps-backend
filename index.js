@@ -7,6 +7,9 @@ const mongoose = require('mongoose')
 const config = require('./config/db')
 const userRoutes = require('./api/route/userroute.js')
 const reciperoute = require('./api/route/reciperoute.js');
+const forumTemeRoute = require('./routes/forumteme');
+
+
 
 app.use(cors({
     origin: 'http://localhost:8080'
@@ -23,6 +26,9 @@ mongoose.connect(config.database)
 app.use(express.json());
 app.use(userRoutes);
 app.use(reciperoute);
+app.use('/api', forumTemeRoute);
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); app.listen(port, () => {
     console.log(`App is running on ${port}`);

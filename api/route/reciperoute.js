@@ -7,6 +7,6 @@ const recipeController = require('../controllers/recipecontroller');
 const storage = multer.memoryStorage(); //za vise slika NERDI
 const upload = multer({ storage: storage });
 
-router.post('/saverecipe', upload.array('recipeImages', 5), recipeController.saveRecipe);
+router.post('api/saverecipe', upload.array('recipeImages', 5), recipeController.saveRecipe);
 
 module.exports = router;
