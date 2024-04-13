@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const config = require('./config/db')
 const userRoutes = require('./api/route/userroute.js')
 const reciperoute = require('./api/route/reciperoute.js');
-const forumTemeRoute = require('./routes/forumteme');
+const forumTemeRoute = require('./api/route/forumtemeroute.js');
 
 
 
@@ -27,7 +27,6 @@ app.use(express.json());
 app.use(userRoutes);
 app.use(reciperoute);
 app.use('/api', forumTemeRoute);
-
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); app.listen(port, () => {

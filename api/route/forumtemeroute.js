@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Topic = require('../models/topic'); // uvoz modela teme
+const Topic = require('../models/forumtopicmodel'); // uvoz modela teme
 
 // ruta za spremanje nove teme
 router.post('/topics', async (req, res) => {
