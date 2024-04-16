@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const Topic = require('../models/forumtopicmodel'); // uvoz modela teme
+const Post = require('../models/postmodel');
 
-// ruta za spremanje nove teme
-router.post('/topics', async (req, res) => {
+// dohvat postova s filtriranjem po naslovu
+router.get('/posts', async (req, res) => {
     try {
-        const newTopic = new Topic(req.body);
-        const savedTopic = await newTopic.save();
-        res.status(201).json(savedTopic);
-    } catch (error) {
-        console.error('Greška prilikom spremanja teme:', error);
-        res.status(500).json({ error: 'Došlo je do interne pogreške.' });
+        const { cardtitle } = req.query;
+        let query = {};
+
+        if (cardtitle) {
+            query.cardtitle = { $regex: cardtitle, $options: 'i' }; // pretraga neosjetljiva na velika/mala slova
+        }
+
+        const posts = await Post.find(query);
+        res.json(posts);
+    } catch (err) {
+        res.status(500).send(err);
     }
 });
 

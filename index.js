@@ -12,8 +12,9 @@ const forumTemeRoute = require('./api/route/forumtemeroute.js');
 
 
 app.use(cors({
-    origin: 'http://localhost:8080'
+    origin: ['http://localhost:8080', 'https://projekt-web-apps-frontend.vercel.app']
 }));
+
 
 mongoose.connect(config.database)
     .then(() => {

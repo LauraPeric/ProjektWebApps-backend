@@ -1,6 +1,6 @@
 const Recipe = require('../models/recipemodel');
 
-// netoda za spremanje recepta
+// metoda za spremanje recepta
 exports.createRecipe = async (req, res) => {
     try {
         const { title, description, authorName, recipeDetails, recipeImage } = req.body;
