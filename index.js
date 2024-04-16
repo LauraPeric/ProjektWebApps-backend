@@ -9,6 +9,7 @@ const userRoutes = require('./api/route/userroute.js')
 const reciperoute = require('./api/route/reciperoute.js');
 const forumTemeRoute = require('./api/route/forumtemeroute.js');
 
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 
 app.use(cors({
