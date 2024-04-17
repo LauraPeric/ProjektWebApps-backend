@@ -13,7 +13,8 @@ app.get("/", (req, res) => res.send("Express on Vercel"));
 
 
 app.use(cors({
-    origin: ['http://localhost:8080', 'https://projekt-web-apps-frontend.vercel.app']
+    origin: ['http://localhost:8080', 'https://projekt-web-apps-frontend.vercel.app', 'https://projektwebapps-backend.onrender.com'
+    ]
 }));
 
 
